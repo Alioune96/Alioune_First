@@ -1,8 +1,8 @@
 package com.techelevator;
 
 public class Item {
-    String name = "";
-    String typeOfItem = "";
+    private String name = "";
+    private String typeOfItem = "";
 
     double itemCost = 0;
 

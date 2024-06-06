@@ -22,7 +22,6 @@ public class Application {
 			logFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\log.txt");
 			salesFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\finalReport.txt");
 
-
 		}
 		Scanner keyboard = new Scanner(System.in);
 		File trycase = new File("vendingmachine.csv");
