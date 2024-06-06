@@ -1,8 +1,11 @@
 package com.techelevator;
 
+import java.io.File;
+
 public class Application {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		File logFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\log.txt");
+		File salesFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\finalReport.txt");
 	}
 }
