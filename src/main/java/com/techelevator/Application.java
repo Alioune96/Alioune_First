@@ -55,6 +55,7 @@ public class Application {
 
 		while (isOn){
 			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales);
+			MenuOrdering menu2 = new MenuOrdering(totalSales, machineBalance, vendingMachineItems, keyboard, logFile);
 
 		}
 

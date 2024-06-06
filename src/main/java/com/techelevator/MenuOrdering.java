@@ -11,11 +11,12 @@ import java.util.SortedMap;
 public class MenuOrdering {
 
 
-    public MenuOrdering(int totalSales, double machineBalance, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
 
+    public MenuOrdering(double totalSales, double machineBalance, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
         try (PrintWriter writer = new PrintWriter(logFiles)){
 
             List <Item> boughtItems = new ArrayList<>();
+
             int userInput = 0;
             while (userInput<3){
                 try{
@@ -44,6 +45,7 @@ public class MenuOrdering {
             System.out.println("File is Moved");
         }
 
+
     }
 
     public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, Double machineBalance, PrintWriter logFile){
@@ -70,10 +72,20 @@ public class MenuOrdering {
 
             boughtItems.add(customerItem);
 
-
-
             logFile.println(itemName + " " + validKey + " $" + itemPrice + " $" + machineBalance);
 
+            String itemType = customerItem.getTypeOfItem();
+            switch(itemType){
+                case "Chip":
+                    System.out.println("Crunch Crunch, Yum!");
+                case "Candy":
+                    System.out.println("Munch Munch, Yum!");
+                case "Drink":
+                    System.out.println( "Glug Glug, Yum!");
+                case "Gum":
+                    System.out.println("Chew Chew, Yum!");
+                default:
+            }
         }
         else{
             System.out.println("Not Enough money to buy the item. Item cost " + itemPrice);
