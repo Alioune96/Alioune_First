@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.SortedMap;
 
 public class MenuStarter {
 
-    public MenuStarter(Scanner keyboard, Map<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales){
+    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales){
 
 
         Integer numberUserPressed = 0;

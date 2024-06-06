@@ -53,18 +53,8 @@ public class Application {
 
 
 
-
-
-
-
-
-
-
-
-
-
 		while (isOn){
-
+			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales);
 
 		}
 
