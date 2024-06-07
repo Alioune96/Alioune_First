@@ -14,7 +14,7 @@ public class VariableAssign {
     public void setMachineBalance(double currentBalance) {
         BigDecimal element = new BigDecimal(currentBalance);
         this.machineBalance = element;
-        this.machineBalance = this.machineBalance.setScale(2);
+        this.machineBalance = this.machineBalance.setScale(2 ,RoundingMode.CEILING);
     }
 
     public BigDecimal getMachineBalance() {
