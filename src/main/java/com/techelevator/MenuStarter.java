@@ -37,19 +37,8 @@ public class MenuStarter {
 
 
             if (numberUserPressed == 1) {
+                MenuList forPrint= new MenuList(vendingMachineItems);
 
-                for (String element : vendingMachineItems.keySet()) {
-
-                    String key = element;
-                    String itemName = vendingMachineItems.get(element).get(0).getName();
-                    double itemPrice = vendingMachineItems.get(element).get(0).getItemCost();
-
-                    //has one extra non-existing item for comparision if size == 0
-                    int itemSize = vendingMachineItems.get(element).size() - 1;
-
-                    String outputLine = key + "|" + itemName + "|" + "price: " + itemPrice + "|" + "count: " + itemSize;
-                    System.out.println(outputLine);
-                }
             } else if (numberUserPressed == 2) {
                 MenuOrdering menu2 = new MenuOrdering(allVariables, vendingMachineItems, keyboard, logFile);
             } else if (numberUserPressed == 3) {

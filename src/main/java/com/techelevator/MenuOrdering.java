@@ -3,16 +3,16 @@ package com.techelevator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.SortedMap;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 
 public class MenuOrdering {
 
 
-
     public MenuOrdering(VariableAssign allVariables, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
+        LocalDate dateTime= LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
         try (PrintWriter writer = new PrintWriter(logFiles)){
 
             List <Item> boughtItems = new ArrayList<>();
@@ -37,16 +37,16 @@ public class MenuOrdering {
                         System.out.println("Wrong input");
                     }
                     else if(userParse==1){
-                        feedMoney(keyboard, allVariables,writer);
+                        feedMoney(keyboard, allVariables,writer,dateTime, currentTime);
 
 
                     }
                     else if(userParse==2){
-                        boughtItems(vendingMachinesItems,boughtItems,keyboard,allVariables,writer);
+                        boughtItems(vendingMachinesItems,boughtItems,keyboard,allVariables,writer,dateTime,currentTime);
                     }
 
                     else{
-                        finishedTransaction(allVariables,writer);
+                        finishedTransaction(allVariables,writer,dateTime,currentTime);
                         userInput = 3;
                     }
 
@@ -61,13 +61,35 @@ public class MenuOrdering {
 
 
     }
-]
-    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, VariableAssign allVariables, PrintWriter logFile){
+
+    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, VariableAssign allVariables, PrintWriter logFile, LocalDate currentDate, LocalTime currentTime){
 
 
         String validKey = null;
         while(validKey == null) {
+
+            System.out.println("Would you like to see the menu again?, (Y) or (N)");
+            boolean toBeginWith =true;
+            while (toBeginWith){
+                String confirmation = keyboard.nextLine();
+                confirmation.trim().toLowerCase();
+
+                if(confirmation.length()==1) {
+                    if (confirmation.contains("y")) {
+                        MenuList forPrintAgain = new MenuList(vendingMachineItems);
+                        toBeginWith=false;
+                    } else if (confirmation.contains("n")){
+                        toBeginWith=false;
+                    }else {
+                        System.out.println("Please try again, letter is invalid.");
+                    }
+                }
+                else {
+                    System.out.println("Please try again, input is invalid.");
+                }
+            }
             System.out.println("Enter a key for an item");
+
             String userKey = keyboard.nextLine();
 
             if (vendingMachineItems.containsKey(userKey)) {
@@ -90,7 +112,7 @@ public class MenuOrdering {
             allVariables.minusMachineBalance(itemPrice);
             allVariables.addTotalSales(itemPrice);
 
-            logFile.println(itemName + " " + validKey + " $" + itemPrice + " $" + allVariables.getMachineBalance());
+            logFile.println( currentDate + " " + currentTime + " " + itemName + " " + validKey + " $" + itemPrice + " $" + allVariables.getMachineBalance());
 
             String itemType = customerItem.getTypeOfItem();
             switch(itemType){
@@ -118,7 +140,7 @@ public class MenuOrdering {
     }
 
 
-    public void feedMoney(Scanner keyboard, VariableAssign allVariables,PrintWriter writer){
+    public void feedMoney(Scanner keyboard, VariableAssign allVariables,PrintWriter writer, LocalDate dateTime, LocalTime currentTime){
         System.out.println("Please add money to vending machine balance");
         boolean currently = true;
         double additionValue = 0;
@@ -142,13 +164,13 @@ public class MenuOrdering {
             }
 
         }
-        writer.println("FEED MONEY: "+ "$"+additionValue +"$"+ allVariables.getMachineBalance());
+        writer.println(dateTime+" "+ currentTime+" "+ "FEED MONEY: "+ "$"+additionValue +" $"+ allVariables.getMachineBalance());
 
 
     }
 
-    public void finishedTransaction(VariableAssign allVariable, PrintWriter writer){
-        writer.println("Give Change: "+ "$"+ allVariable.getMachineBalance() + "$0.00");
+    public void finishedTransaction(VariableAssign allVariable, PrintWriter writer, LocalDate date,LocalTime time){
+        writer.println(date +" "+ time +" "+ "Give Change: "+ "$"+ allVariable.getMachineBalance() + " $0.00");
         System.out.println("Returns your change: " + allVariable.getMachineBalance());
         allVariable.setMachineBalance(0);
     }
