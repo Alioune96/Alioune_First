@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 
 public class VariableAssign {
 
+
     private boolean isOn = true;
 
     private BigDecimal totalSales = new BigDecimal(0.00);
