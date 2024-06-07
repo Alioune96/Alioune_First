@@ -9,6 +9,8 @@ public class Application {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
+
+
 		double totalSales = 0;
 		boolean isOn = true;
 		double machineBalance = 0;

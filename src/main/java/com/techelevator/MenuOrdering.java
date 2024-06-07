@@ -60,7 +60,7 @@ public class MenuOrdering {
 
     }
 
-    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, Double machineBalance, PrintWriter logFile){
+    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, double machineBalance, PrintWriter logFile){
 
         String validKey = null;
         while(validKey == null) {
