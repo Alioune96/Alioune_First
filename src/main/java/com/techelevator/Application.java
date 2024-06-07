@@ -23,8 +23,8 @@ public class Application {
 
 
 		{
-			logFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\log.txt");
-			salesFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\finalReport.txt");
+			logFile = new File("src/main/resources/log.txt");
+			salesFile = new File("src/main/resources/salesReport");
 
 		}
 		File trycase = new File("vendingmachine.csv");
@@ -59,7 +59,7 @@ public class Application {
 
 		while (allVariables.isOn()){
 
-			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, allVariables, logFile);
+			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, allVariables, logFile, salesFile);
 
 
 		}

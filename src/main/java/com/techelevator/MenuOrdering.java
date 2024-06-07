@@ -17,25 +17,37 @@ public class MenuOrdering {
 
             List <Item> boughtItems = new ArrayList<>();
 
+
+
+            String userWord = "";
             int userInput = 0;
             while (userInput<3){
 
+                System.out.println("");
+                System.out.println("Menu 2");
+                System.out.println("(1)Add Money");
+                System.out.println("(2)Buy Item");
+                System.out.println("(3)Finish Transaction");
 
                 try{
-                    String userWord = keyboard.nextLine();
+                    userWord = keyboard.nextLine();
                     int userParse = Integer.parseInt(userWord);
+
                     if(userParse<0 || userParse>3){
                         System.out.println("Wrong input");
                     }
                     else if(userParse==1){
                         feedMoney(keyboard, allVariables,writer);
+
+
                     }
                     else if(userParse==2){
                         boughtItems(vendingMachinesItems,boughtItems,keyboard,allVariables,writer);
                     }
-                    else if(userParse==3){
+
+                    else{
                         finishedTransaction(allVariables,writer);
-                        userInput=userParse;
+                        userInput = 3;
                     }
 
                 }catch (NumberFormatException e){
@@ -50,7 +62,7 @@ public class MenuOrdering {
 
     }
 
-    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, Double machineBalance, PrintWriter logFile){
+    public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, VariableAssign allVariables, PrintWriter logFile){
 
         String validKey = null;
         while(validKey == null) {
@@ -67,67 +79,77 @@ public class MenuOrdering {
 
         double itemPrice = vendingMachineItems.get(validKey).get(0).getItemCost();
 
-        if(machineBalance >= itemPrice){
+        if(allVariables.getMachineBalance() >= itemPrice){
 
             Item customerItem = vendingMachineItems.get(validKey).remove(0);
             String itemName = customerItem.getName();
 
             boughtItems.add(customerItem);
 
-            logFile.println(itemName + " " + validKey + " $" + itemPrice + " $" + machineBalance);
+            allVariables.minusMachineBalance(itemPrice);
+            allVariables.addTotalSales(itemPrice);
+
+            logFile.println(itemName + " " + validKey + " $" + itemPrice + " $" + allVariables.getMachineBalance());
 
             String itemType = customerItem.getTypeOfItem();
             switch(itemType){
                 case "Chip":
                     System.out.println("Crunch Crunch, Yum!");
+                    break;
                 case "Candy":
                     System.out.println("Munch Munch, Yum!");
+                    break;
                 case "Drink":
                     System.out.println( "Glug Glug, Yum!");
+                    break;
                 case "Gum":
                     System.out.println("Chew Chew, Yum!");
+                    break;
                 default:
             }
+            System.out.println("You have " + allVariables.getMachineBalance() + " left.");
         }
         else{
             System.out.println("Not Enough money to buy the item. Item cost " + itemPrice);
-            System.out.println("You have " + machineBalance);
+            System.out.println("You have " + allVariables.getMachineBalance());
         }
 
     }
 
 
-    public void feedMoney(Scanner keyboard, double machineBalance,PrintWriter writer){
+    public void feedMoney(Scanner keyboard, VariableAssign allVariables,PrintWriter writer){
         System.out.println("Please add money to vending machine balance");
         boolean currently = true;
         double additionValue = 0;
         while(currently) {
             try {
-                String userInput = keyboard.next();
+                String userInput = keyboard.nextLine();
                 additionValue = Double.valueOf(userInput);
 
-                if (additionValue <= 0 && additionValue >= 11) {
+
+                if (additionValue <= 0 || additionValue >= 11) {
                     System.out.println("Vending Machine can't accept amount.");
                 } else {
-                    machineBalance += additionValue;
-                    System.out.println("Current Money Provided: " + machineBalance);
+                    allVariables.addMachineBalance(additionValue);
+                    System.out.println("Current Money Provided: " + allVariables.getMachineBalance());
 
-                currently=false;
+                    currently=false;
                 }
 
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 System.out.println("That invalid, Please try again");
             }
+
         }
-        writer.println("FEED MONEY: "+ "$"+additionValue +"$"+ machineBalance);
+        writer.println("FEED MONEY: "+ "$"+additionValue +"$"+ allVariables.getMachineBalance());
 
 
     }
 
-    public double finishedTransaction(double machineBalance, PrintWriter writer){
-        writer.println("Give Change: "+ "$"+machineBalance+ "$0.00");
-        machineBalance = 0;
-        return machineBalance;
+    public void finishedTransaction(VariableAssign allVariable, PrintWriter writer){
+        writer.println("Give Change: "+ "$"+ allVariable.getMachineBalance() + "$0.00");
+        System.out.println("Returns your change: " + allVariable.getMachineBalance());
+        allVariable.setMachineBalance(0);
     }
 
 

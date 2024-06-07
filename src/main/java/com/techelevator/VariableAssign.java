@@ -20,8 +20,16 @@ public class VariableAssign {
         return machineBalance;
     }
 
-    public void setMachineBalance(double machineBalance) {
+    public void addMachineBalance(double machineBalance) {
         this.machineBalance = this.machineBalance+machineBalance;
+    }
+
+    public void minusMachineBalance(double machineBalance) {
+        this.machineBalance = this.machineBalance - machineBalance;
+    }
+
+    public void setMachineBalance(double machineBalance) {
+        this.machineBalance = machineBalance;
     }
 
     public double getTotalSales() {
@@ -29,6 +37,10 @@ public class VariableAssign {
     }
 
     public void setTotalSales(double totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public void addTotalSales(double totalSales) {
         this.totalSales =  this.totalSales + totalSales;
     }
 }

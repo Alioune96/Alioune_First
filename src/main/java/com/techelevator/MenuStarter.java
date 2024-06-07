@@ -9,12 +9,15 @@ import java.util.SortedMap;
 
 public class MenuStarter {
 
-    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, VariableAssign allVariables, File logFile){
+    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, VariableAssign allVariables, File logFile, File salesFile){
+
+
 
 
         Integer numberUserPressed = 0;
 
-        while(numberUserPressed == 0){
+        while(numberUserPressed == 0) {
+            System.out.println("");
             System.out.println("Menu 1");
             System.out.println("(1) Display Vending Machine Items");
             System.out.println("(2) Purchase");
@@ -23,51 +26,51 @@ public class MenuStarter {
             String userInput = keyboard.nextLine();
             userInput = userInput.trim();
 
-            try{
+            try {
                 numberUserPressed = Integer.parseInt(userInput);
-                if(numberUserPressed <= 0 || numberUserPressed >= 5){
+                if (numberUserPressed <= 0 || numberUserPressed >= 5) {
                     numberUserPressed = 0;
                 }
-            }catch(Exception error){
+            } catch (Exception error) {
                 System.out.println("Number provided is not a number.");
             }
-        }
 
-        if(numberUserPressed == 1){
-            for(String element: vendingMachineItems.keySet()){
 
-                String key = element;
-                String itemName = vendingMachineItems.get(element).get(0).getName();
-                double itemPrice = vendingMachineItems.get(element).get(0).getItemCost();
-                //has one extra non-existing item for comparision if size == 0
-                int itemSize = vendingMachineItems.get(element).size() -1;
+            if (numberUserPressed == 1) {
 
-                String outputLine = key + "\\|" + itemName + "\\|" + "price: " + itemPrice + "\\|" + "count: " + itemSize;
-                System.out.println(outputLine);
-            }
-        }
-        else if(numberUserPressed == 2){
-            MenuOrdering menu2 = new MenuOrdering(allVariables, vendingMachineItems, keyboard, logFile);
-        }
-        else if(numberUserPressed == 3){
-            allVariables.setOn(false);
-        }
-        else{
-            File salesReport = new File("C:\\Users\\Student\\workspace\\pairs\\capstoneModule1\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\salesReport");
+                for (String element : vendingMachineItems.keySet()) {
 
-            try(PrintWriter writeFile = new PrintWriter(salesReport)){
-                for(String element: vendingMachineItems.keySet()){
+                    String key = element;
                     String itemName = vendingMachineItems.get(element).get(0).getName();
-                    int itemSize = vendingMachineItems.get(element).size() - 1;
-                    System.out.println(itemName + "\\|" + itemSize);
-                }
-                System.out.println("");
-                System.out.println("**TOTAL SALES** " + allVariables.getTotalSales());
-            }
-            catch(FileNotFoundException error){
-                System.out.println("Someone moved the file. Put it back please.");
-            }
+                    double itemPrice = vendingMachineItems.get(element).get(0).getItemCost();
 
+                    //has one extra non-existing item for comparision if size == 0
+                    int itemSize = vendingMachineItems.get(element).size() - 1;
+
+                    String outputLine = key + "|" + itemName + "|" + "price: " + itemPrice + "|" + "count: " + itemSize;
+                    System.out.println(outputLine);
+                }
+            } else if (numberUserPressed == 2) {
+                MenuOrdering menu2 = new MenuOrdering(allVariables, vendingMachineItems, keyboard, logFile);
+            } else if (numberUserPressed == 3) {
+                allVariables.setOn(false);
+            } else {
+
+                try (PrintWriter writeFile = new PrintWriter(salesFile)) {
+                    for (String element : vendingMachineItems.keySet()) {
+                        String itemName = vendingMachineItems.get(element).get(0).getName();
+                        int itemSize = vendingMachineItems.get(element).size() - 1;
+
+                        writeFile.println(itemName +  "|"  + itemSize);
+                        System.out.println(itemName + "|" + itemSize);
+                    }
+                    System.out.println("");
+                    System.out.println("**TOTAL SALES** " + allVariables.getTotalSales());
+                } catch (FileNotFoundException error) {
+                    System.out.println("Someone moved the file. Put it back please.");
+                }
+
+            }
         }
     }
 }
