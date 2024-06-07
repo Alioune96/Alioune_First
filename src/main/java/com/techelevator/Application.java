@@ -9,9 +9,12 @@ public class Application {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		double totalSales = 0;
-		boolean isOn = true;
-		double machineBalance = 0;
+		VariableAssign allVariables = new VariableAssign();
+		allVariables.setTotalSales(0);
+		allVariables.setMachineBalance(0);
+		allVariables.setOn(true);
+
+
 		File logFile;
 		File salesFile;
 		SortedMap<String,List<Item>> vendingMachineItems= new TreeMap<>();
@@ -54,11 +57,9 @@ public class Application {
 
 
 
-		while (isOn){
+		while (allVariables.isOn()){
 
-			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales, machineBalance, logFile);
-
-
+			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, allVariables, logFile);
 
 
 		}

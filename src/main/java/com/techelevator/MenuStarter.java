@@ -9,7 +9,7 @@ import java.util.SortedMap;
 
 public class MenuStarter {
 
-    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales, double machineBalance, File logFile){
+    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, VariableAssign allVariables, File logFile){
 
 
         Integer numberUserPressed = 0;
@@ -47,10 +47,10 @@ public class MenuStarter {
             }
         }
         else if(numberUserPressed == 2){
-            MenuOrdering menu2 = new MenuOrdering(totalSales, machineBalance, vendingMachineItems, keyboard, logFile);
+            MenuOrdering menu2 = new MenuOrdering(allVariables, vendingMachineItems, keyboard, logFile);
         }
         else if(numberUserPressed == 3){
-            isOn = false;
+            allVariables.setOn(false);
         }
         else{
             File salesReport = new File("C:\\Users\\Student\\workspace\\pairs\\capstoneModule1\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\salesReport");
@@ -62,7 +62,7 @@ public class MenuStarter {
                     System.out.println(itemName + "\\|" + itemSize);
                 }
                 System.out.println("");
-                System.out.println("**TOTAL SALES** " + totalSales);
+                System.out.println("**TOTAL SALES** " + allVariables.getTotalSales());
             }
             catch(FileNotFoundException error){
                 System.out.println("Someone moved the file. Put it back please.");

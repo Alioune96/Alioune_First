@@ -12,13 +12,15 @@ public class MenuOrdering {
 
 
 
-    public MenuOrdering(double totalSales, double machineBalance, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
+    public MenuOrdering(VariableAssign allVariables, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
         try (PrintWriter writer = new PrintWriter(logFiles)){
 
             List <Item> boughtItems = new ArrayList<>();
 
             int userInput = 0;
             while (userInput<3){
+
+
                 try{
                     String userWord = keyboard.nextLine();
                     int userParse = Integer.parseInt(userWord);
@@ -26,13 +28,13 @@ public class MenuOrdering {
                         System.out.println("Wrong input");
                     }
                     else if(userParse==1){
-                        feedMoney(keyboard,machineBalance,writer);
+                        feedMoney(keyboard, allVariables,writer);
                     }
                     else if(userParse==2){
-                        boughtItems(vendingMachinesItems,boughtItems,keyboard,machineBalance,writer);
+                        boughtItems(vendingMachinesItems,boughtItems,keyboard,allVariables,writer);
                     }
                     else if(userParse==3){
-                        finishedTransaction(machineBalance,writer);
+                        finishedTransaction(allVariables,writer);
                         userInput=userParse;
                     }
 
