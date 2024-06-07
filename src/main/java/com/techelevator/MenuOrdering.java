@@ -17,23 +17,35 @@ public class MenuOrdering {
 
             List <Item> boughtItems = new ArrayList<>();
 
+
+
+            String userWord = "";
             int userInput = 0;
             while (userInput<3){
+                System.out.println("");
+                System.out.println("Menu 2");
+                System.out.println("(1)Add Money");
+                System.out.println("(2)Buy Item");
+                System.out.println("(3)Finish Transaction");
+
                 try{
-                    String userWord = keyboard.nextLine();
+                    System.out.println("Please");
+                    userWord = keyboard.nextLine();
                     int userParse = Integer.parseInt(userWord);
+
                     if(userParse<0 || userParse>3){
                         System.out.println("Wrong input");
                     }
                     else if(userParse==1){
                         feedMoney(keyboard,machineBalance,writer);
+
                     }
                     else if(userParse==2){
                         boughtItems(vendingMachinesItems,boughtItems,keyboard,machineBalance,writer);
                     }
-                    else if(userParse==3){
+                    else{
                         finishedTransaction(machineBalance,writer);
-                        userInput=userParse;
+                        userInput = 3;
                     }
 
                 }catch (NumberFormatException e){
@@ -101,24 +113,27 @@ public class MenuOrdering {
         double additionValue = 0;
         while(currently) {
             try {
-                String userInput = keyboard.next();
+                String userInput = keyboard.nextLine();
                 additionValue = Double.valueOf(userInput);
 
-                if (additionValue <= 0 && additionValue >= 11) {
+
+                if (additionValue <= 0 || additionValue >= 11) {
                     System.out.println("Vending Machine can't accept amount.");
                 } else {
                     machineBalance += additionValue;
                     System.out.println("Current Money Provided: " + machineBalance);
 
-                currently=false;
+                    currently=false;
                 }
 
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 System.out.println("That invalid, Please try again");
             }
+
         }
         writer.println("FEED MONEY: "+ "$"+additionValue +"$"+ machineBalance);
-
+//        writer.flush();
+//        writer.close();
 
     }
 

@@ -12,6 +12,8 @@ public class MenuStarter {
     public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales, double machineBalance, File logFile){
 
 
+
+
         Integer numberUserPressed = 0;
 
         while(numberUserPressed == 0){
