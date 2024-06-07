@@ -61,8 +61,9 @@ public class MenuOrdering {
 
 
     }
-
+]
     public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, VariableAssign allVariables, PrintWriter logFile){
+
 
         String validKey = null;
         while(validKey == null) {

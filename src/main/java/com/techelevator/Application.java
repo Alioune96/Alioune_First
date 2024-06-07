@@ -15,6 +15,7 @@ public class Application {
 		allVariables.setOn(true);
 
 
+
 		File logFile;
 		File salesFile;
 		SortedMap<String,List<Item>> vendingMachineItems= new TreeMap<>();
