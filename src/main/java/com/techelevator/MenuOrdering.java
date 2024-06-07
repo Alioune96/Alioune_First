@@ -65,7 +65,6 @@ public class MenuOrdering {
 
     public void boughtItems(SortedMap <String , List<Item>> vendingMachineItems, List <Item> boughtItems, Scanner keyboard, VariableAssign allVariables, PrintWriter logFile, LocalDate currentDate, LocalTime currentTime){
 
-
         String validKey = null;
         while(validKey == null) {
 
@@ -103,35 +102,48 @@ public class MenuOrdering {
 
         double itemPrice = vendingMachineItems.get(validKey).get(0).getItemCost();
 
-        if(allVariables.getMachineBalance() >= itemPrice){
+        BigDecimal convertedPrice = new BigDecimal(itemPrice);
 
-            Item customerItem = vendingMachineItems.get(validKey).remove(0);
-            String itemName = customerItem.getName();
+        List <Item> itemInfo = vendingMachineItems.get(validKey);
 
-            boughtItems.add(customerItem);
+        //machine is larger or equals to converted price
+        if(allVariables.getMachineBalance().compareTo(convertedPrice) >= 0){
 
-            allVariables.minusMachineBalance(itemPrice);
-            allVariables.addTotalSales(itemPrice);
+            if(itemInfo.size() > 1){
 
-            logFile.println( currentDate + " " + currentTime + " " + itemName + " " + validKey + " $" + itemPrice + " $" + allVariables.getMachineBalance());
+                Item customerItem = vendingMachineItems.get(validKey).remove(0);
+                String itemName = customerItem.getName();
+                boughtItems.add(customerItem);
 
-            String itemType = customerItem.getTypeOfItem();
-            switch(itemType){
-                case "Chip":
-                    System.out.println("Crunch Crunch, Yum!");
-                    break;
-                case "Candy":
-                    System.out.println("Munch Munch, Yum!");
-                    break;
-                case "Drink":
-                    System.out.println( "Glug Glug, Yum!");
-                    break;
-                case "Gum":
-                    System.out.println("Chew Chew, Yum!");
-                    break;
-                default:
+                allVariables.minusMachineBalance(itemPrice);
+                allVariables.addTotalSales(itemPrice);
+
+                logFile.println( currentDate + " " + currentTime + " " + itemName + " " + validKey + " $" + itemPrice + " $" + allVariables.getMachineBalance());
+
+                String itemType = customerItem.getTypeOfItem();
+                switch(itemType){
+                    case "Chip":
+                        System.out.println("Crunch Crunch, Yum!");
+                        break;
+                    case "Candy":
+                        System.out.println("Munch Munch, Yum!");
+                        break;
+                    case "Drink":
+                        System.out.println( "Glug Glug, Yum!");
+                        break;
+                    case "Gum":
+                        System.out.println("Chew Chew, Yum!");
+                        break;
+                    default:
+                }
+                System.out.println("You have " + allVariables.getMachineBalance() + " left.");
+
+
             }
-            System.out.println("You have " + allVariables.getMachineBalance() + " left.");
+            else{
+                System.out.println("This item is empty");
+            }
+
         }
         else{
             System.out.println("Not Enough money to buy the item. Item cost " + itemPrice);
@@ -173,7 +185,7 @@ public class MenuOrdering {
     public void finishedTransaction(VariableAssign allVariable, PrintWriter writer, LocalDate date,LocalTime time){
         writer.println(date +" "+ time +" "+ "Give Change: "+ "$"+ allVariable.getMachineBalance() + " $0.00");
         System.out.println("Returns your change: " + allVariable.getMachineBalance());
-        allVariable.setMachineBalance(0);
+        allVariable.setMachineBalance(0.00);
     }
 
 

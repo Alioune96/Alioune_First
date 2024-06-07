@@ -1,12 +1,38 @@
 package com.techelevator;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class VariableAssign {
 
     private boolean isOn = true;
-    private double machineBalance = 0;
 
-    private double totalSales = 0;
+    private BigDecimal totalSales = new BigDecimal(0.00);
+    private BigDecimal machineBalance = new BigDecimal(0.00);
+
+    public void setMachineBalance(double currentBalance) {
+        BigDecimal element = new BigDecimal(currentBalance);
+        this.machineBalance = element;
+        this.machineBalance = this.machineBalance.setScale(2 ,RoundingMode.CEILING);
+    }
+
+    public BigDecimal getMachineBalance() {
+        return machineBalance;
+    }
+
+    public void addMachineBalance(double machineBalance) {
+        BigDecimal element = new BigDecimal(machineBalance);
+        this.machineBalance = this.machineBalance.add(element);
+        this.machineBalance = this.machineBalance.setScale(2, RoundingMode.CEILING);
+    }
+    public void minusMachineBalance(double machineBalance) {
+        BigDecimal element = new BigDecimal(machineBalance);
+        this.machineBalance = this.machineBalance.subtract(element);
+        this.machineBalance = this.machineBalance.setScale(2, RoundingMode.CEILING);
+    }
+
+
 
     public boolean isOn() {
         return isOn;
@@ -16,31 +42,19 @@ public class VariableAssign {
         this.isOn = on;
     }
 
-    public double getMachineBalance() {
-        return machineBalance;
-    }
-
-    public void addMachineBalance(double machineBalance) {
-        this.machineBalance = this.machineBalance+machineBalance;
-    }
-
-    public void minusMachineBalance(double machineBalance) {
-        this.machineBalance = this.machineBalance - machineBalance;
-    }
-
-    public void setMachineBalance(double machineBalance) {
-        this.machineBalance = machineBalance;
-    }
-
-    public double getTotalSales() {
-        return totalSales;
-    }
 
     public void setTotalSales(double totalSales) {
-        this.totalSales = totalSales;
+        BigDecimal element = new BigDecimal(totalSales);
+        this.totalSales = element;
     }
 
     public void addTotalSales(double totalSales) {
-        this.totalSales =  this.totalSales + totalSales;
+        BigDecimal element = new BigDecimal(totalSales);
+        this.totalSales =  this.totalSales.add(element);
+        this.totalSales = this.totalSales.setScale(2, RoundingMode.CEILING);
+    }
+
+    public BigDecimal getTotalSales() {
+        return totalSales;
     }
 }
