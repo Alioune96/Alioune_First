@@ -9,7 +9,7 @@ import java.util.SortedMap;
 
 public class MenuStarter {
 
-    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales){
+    public MenuStarter(Scanner keyboard, SortedMap<String, List<Item>> vendingMachineItems, boolean isOn, double totalSales, double machineBalance, File logFile){
 
 
         Integer numberUserPressed = 0;
@@ -47,7 +47,7 @@ public class MenuStarter {
             }
         }
         else if(numberUserPressed == 2){
-            MenuOrdering orderMenu = new MenuOrdering();
+            MenuOrdering menu2 = new MenuOrdering(totalSales, machineBalance, vendingMachineItems, keyboard, logFile);
         }
         else if(numberUserPressed == 3){
             isOn = false;

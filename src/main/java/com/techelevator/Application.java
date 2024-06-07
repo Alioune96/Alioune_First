@@ -27,6 +27,7 @@ public class Application {
 		File trycase = new File("vendingmachine.csv");
 		Scanner readFile = new Scanner(trycase);
 
+
 		while(readFile.hasNext()){
 
 			String fileinfo = readFile.nextLine();
@@ -54,8 +55,8 @@ public class Application {
 
 
 		while (isOn){
-			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales);
-			MenuOrdering menu2 = new MenuOrdering(totalSales, machineBalance, vendingMachineItems, keyboard, logFile);
+			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales, machineBalance, logFile);
+
 
 		}
 
