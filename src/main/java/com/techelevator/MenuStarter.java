@@ -54,6 +54,7 @@ public class MenuStarter {
                         System.out.println(itemName + "|" + itemSize);
                     }
                     System.out.println("");
+                    writeFile.println("**TOTAL SALES** " + allVariables.getTotalSales());
                     System.out.println("**TOTAL SALES** " + allVariables.getTotalSales());
                 } catch (FileNotFoundException error) {
                     System.out.println("Someone moved the file. Put it back please.");

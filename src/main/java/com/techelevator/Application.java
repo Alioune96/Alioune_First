@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.*;
 
 
@@ -11,8 +12,10 @@ public class Application {
 
 
 		VariableAssign allVariables = new VariableAssign();
-		allVariables.setTotalSales(0);
-		allVariables.setMachineBalance(0);
+
+
+		allVariables.setTotalSales(0.00);
+		allVariables.setMachineBalance(0.00);
 		allVariables.setOn(true);
 
 
