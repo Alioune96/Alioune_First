@@ -41,7 +41,7 @@ public class MenuOrdering {
 
         if(machineBalance >= itemPrice){
 
-            Item customerItem = vendingMachineItems.get(validKey).removeLast();
+            Item customerItem = vendingMachineItems.get(validKey).remove(0);
             String itemName = customerItem.getName();
 
             boughtItems.add(customerItem);
