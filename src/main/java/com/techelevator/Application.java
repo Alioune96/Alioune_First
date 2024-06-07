@@ -15,6 +15,7 @@ public class Application {
 		File logFile;
 		File salesFile;
 		SortedMap<String,List<Item>> vendingMachineItems= new TreeMap<>();
+		Scanner keyboard = new Scanner(System.in);
 
 
 
@@ -23,7 +24,6 @@ public class Application {
 			salesFile = new File("C:\\Users\\Student\\workspace\\capstonewithDing\\java-blue-minicapstonemodule1-team3\\src\\main\\resources\\finalReport.txt");
 
 		}
-		Scanner keyboard = new Scanner(System.in);
 		File trycase = new File("vendingmachine.csv");
 		Scanner readFile = new Scanner(trycase);
 
@@ -55,8 +55,6 @@ public class Application {
 
 		while (isOn){
 			MenuStarter	menu1 = new MenuStarter(keyboard, vendingMachineItems, isOn, totalSales);
-			MenuOrdering menu2 = new MenuOrdering(totalSales, machineBalance, vendingMachineItems, keyboard, logFile);
-
 		}
 
 	}
