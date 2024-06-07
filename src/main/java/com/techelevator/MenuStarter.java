@@ -25,7 +25,7 @@ public class MenuStarter {
 
             try{
                 numberUserPressed = Integer.parseInt(userInput);
-                if(numberUserPressed <= 0 && numberUserPressed >= 5){
+                if(numberUserPressed <= 0 || numberUserPressed >= 5){
                     numberUserPressed = 0;
                 }
             }catch(Exception error){

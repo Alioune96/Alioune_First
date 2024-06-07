@@ -11,13 +11,39 @@ import java.util.SortedMap;
 public class MenuOrdering {
 
 
+
     public MenuOrdering(double totalSales, double machineBalance, SortedMap<String, List<Item>> vendingMachinesItems, Scanner keyboard, File logFiles){
         try (PrintWriter writer = new PrintWriter(logFiles)){
-        } catch (FileNotFoundException e) {
-            System.out.println("File is Moved.");
-        }
 
-        List <Item> boughtItems = new ArrayList<>();
+            List <Item> boughtItems = new ArrayList<>();
+
+            int userInput = 0;
+            while (userInput<3){
+                try{
+                    String userWord = keyboard.nextLine();
+                    int userParse = Integer.parseInt(userWord);
+                    if(userParse<0 || userParse>3){
+                        System.out.println("Wrong input");
+                    }
+                    else if(userParse==1){
+                        feedMoney(keyboard,machineBalance,writer);
+                    }
+                    else if(userParse==2){
+                        boughtItems(vendingMachinesItems,boughtItems,keyboard,machineBalance,writer);
+                    }
+                    else if(userParse==3){
+                        finishedTransaction(machineBalance,writer);
+                        userInput=userParse;
+                    }
+
+                }catch (NumberFormatException e){
+                    System.out.println("Please enter an valid number");
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File is Moved");
+        }
 
 
     }
@@ -91,10 +117,16 @@ public class MenuOrdering {
                 System.out.println("That invalid, Please try again");
             }
         }
-
-
         writer.println("FEED MONEY: "+ "$"+additionValue +"$"+ machineBalance);
 
 
     }
+
+    public double finishedTransaction(double machineBalance, PrintWriter writer){
+        writer.println("Give Change: "+ "$"+machineBalance+ "$0.00");
+        machineBalance = 0;
+        return machineBalance;
+    }
+
+
 }
